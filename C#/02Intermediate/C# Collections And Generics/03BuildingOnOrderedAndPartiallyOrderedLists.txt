@@ -1,0 +1,50 @@
+Designing an Abstract Collection 
+    AC: 
+        Add sorting requirements to linear collections 
+        Implment a class which paginates a sorted sequence of objects 
+
+        Given       an unordered sequence,  Page size,  a custom sorting criteria 
+        Requred     Sort the sequence,  Divide it into pages in the sorting order 
+
+        *Keep the sequence sorted through the sequence of serving pages*
+
+
+    We'll need to use multipe paginated Data sources, and multipe single paginates
+        Its time for interfaces! 
+
+
+Applying pagination to a sorted list 
+    Expect unsorted data! 
+
+        IEnumerable<T>
+            >>Collect Data into  List<T> 
+                >>Sort Data     
+                    -Keep it stored for further use
+
+        When request comes in 
+            >>Page can consume a section of the sorted List<T>
+
+
+    Operations                  Add         Sort        Fully Populate 
+    SortedList<TKey, TValue>    n * O(n)                O(n^2)   
+    List<T>                     n x O(1)    O(n log n)  O(n log n)      <<Much faster
+
+
+Implementing a List Projection Class 
+    Rather than splitting up the list into sections~ 
+        The list stays as a whole, but the Paginator takes a ReadOnly view of the list, then is able to paginate safely; 
+        See snip x3
+
+Completing the Design 
+    Incredibly interesting stuff! 
+    See snip x3 
+
+Understanding partitioning and Partial Sorting  
+    What made the prior algorithm fail? 
+        Input Sequence 
+            >> Pulled into List 
+                >> QuickSort List 
+                QuickSort sorted the entire list, but we only needed 5 elements of a 100,000 element list for the 1st page. 
+
+
+Summary 
