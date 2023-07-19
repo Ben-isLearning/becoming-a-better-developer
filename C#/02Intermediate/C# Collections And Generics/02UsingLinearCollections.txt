@@ -1,0 +1,68 @@
+Encapsulating Collections 
+    Demo 1:
+        IEnumerable<T>
+            >>Collects Data into    List<T> 
+                >>Mutates Data 
+                    >>Freezes Data 
+                        >>Build Queries can produce Views ~ Stable unchangeable results, safe for reuse. 
+
+   Demo 2: 
+        IEnumerable<T> 
+            >>Collects Data into   List<T>
+                >>Perform multiple Operations to stir up List's content, without destorying previous operations data. 
+
+
+Encapsulating A List ~ The power of linear collections 
+
+    The generic GridFormatter accepts an IEnumerable<T>, then saves it internally as an IList<T>
+    See snip x2 
+
+        Constructors should construct a valid object, not do its work. 
+        Create methods to do the work! 
+        Constructor could be called 100s of times, but methods shouldn't be called on creation. 
+
+    The Augmented Constructor Principle 
+        Avoid work in a constructor that significantly exceeds the dimenstions of its arguments. 
+
+
+Justifying Decisions 
+    Why a List, rather than anything else? 
+
+    IEnumerable comes into the GridFormatter at an unknown length, 
+        IList can grow incremenetally without knowing its size
+        IList supports column- and row-wise traveral in a simulated matrix 
+        IList's Index takes O(1) time ~ Very fast! 
+        IList's Count property trakes O(1) time ~ Very fast!
+
+        List<T>                                     T[]
+        Exposes Indexer with range checks           Exposes Indexer with range checks 
+                                                    Efficient iteration in some edge cases 
+        Collected using ToList()                    Collected using ToArray()
+        ToList() collects straight into the list    ToArray() uses intermediate storage 
+        Complete collecting in one go               Requires one more copy operation
+        (Sits on Array)
+        Half of underlying array not used           All array locations are used 
+        Not trimmed list wastes memory              Array uses memory optimally 
+
+    Linear >>> Complex collections (As long as the linear collection does the job)
+
+Imposing views upon a Collections
+    Additional AC: Calculate optimal number of columns.
+
+    After data has been stored in the Class, 
+        subsequent methods can be treated as queries ran on the encasulated
+
+        public IEnumerable<string> Format(int width, int gap) => 
+            Enumerable.Empty<string>();                                     << Nothing but a specfic view of the list that returns printable rows 
+
+
+Left @ 1.05
+
+
+Completing the design 
+
+Inventing Shuffling algorithm 
+
+Implementing Data Randomization 
+
+Summary 
