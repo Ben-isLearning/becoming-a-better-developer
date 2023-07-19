@@ -52,14 +52,29 @@ Imposing views upon a Collections
     After data has been stored in the Class, 
         subsequent methods can be treated as queries ran on the encasulated
 
+    After data has entered the class, 
+        There is no reason to keep the input objects
+        When data is stored for reuse, try to store the data in the most useful format.  
+
         public IEnumerable<string> Format(int width, int gap) => 
             Enumerable.Empty<string>();                                     << Nothing but a specfic view of the list that returns printable rows 
 
 
-Left @ 1.05
-
-
 Completing the design 
+
+    Jesus crist this was an intense module ~ 
+    The 30 lines of code calling twice, have been replaced with 150 lines of code to format the data correctly, then call once. 
+    See Snips x2
+
+    Power of Lists ~ 
+        Guarantees O(1) time    to append an item 
+                                to retreive total count of items 
+                                to access an item at random possition
+
+    A list has been used to construct an algorith, both time and space linear! 
+        And the main method doesn't know how we have used said list to solve the problem! 
+            and it doesnt even know the list exists! 
+            +Data encapsualation at its finest! 
 
 Inventing Shuffling algorithm 
 
