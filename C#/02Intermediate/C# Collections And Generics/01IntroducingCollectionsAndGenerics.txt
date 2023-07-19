@@ -96,7 +96,11 @@ Understanding the need for a collection;
     A collection isnt a request, its a means of fufilling a request! 
 
     AC: "Given a sequence of objects and an integer number of columns, print the objects out formatted as a grid"
-    
-     
-    
+        See Snips~ 
+
+
+Summary;
+
+    Processing data may impose the use of collections! 
+        But which collection is best for the task at hand? 
 
