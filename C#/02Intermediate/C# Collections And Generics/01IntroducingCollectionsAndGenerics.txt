@@ -1,0 +1,102 @@
+Division of Collections: ~ The best collection type is one you do not depend on. 
+    Recap on OOP 
+        Everything is an object 
+
+        A class is an object 
+            SomeClass obj = new SomeClass(); 
+
+        a collection of classes is also an object
+            List<SomeClass> list = new List<SomeClass>();
+
+        as such, operations can apply to single objects and collections alike;
+            obj.Clear();
+            list.Clear();
+
+
+    Logical Division of Collections; 
+
+        Linear;
+            array, list, stack, queue
+
+        Associative: 
+            dictionary, hash set 
+
+        Graph;                                     **This course wont really go into graphs.  
+            Proper graphs, trees  
+
+
+    Abstractions:
+        IList<T> is the Linear collection in .NET 
+        IDictionary<TKey, TValue> is the accociative collection .NET
+
+
+    Comparison~ List vs Dictionary: 
+        List                                                    Dictionary 
+        Stores items one after another                          associates each item with a key 
+        can acheive contant-time retreival                      can acheive constant-time retreival
+        random insert/retrieve may take linear time             random insert/retreive takes same time for all items 
+        insert/remove on last item usually constant time        adding/removing last item takes same time as for any other 
+        Holds all items, even duplicates                        Can only hold items wih unique keys 
+
+
+    Guidelines: 
+        Simplicity is our friend
+        Favor Linear collections
+        If there is a solution based on a ist or a stack - take it! 
+        Favor associative collections over graphs 
+        Above all, Favor an encapsulated collection
+
+
+    Best Practices: 
+        Favor encapsualted collection over any other 
+
+        Hide collections behind an abstraction interface 
+
+
+Understanding the role of Generics: ~
+
+    C# enforces Type safety - All types must be known at run-time 
+
+        IEnumerable<type> Sort<type>(type[] data)
+        {
+            ...
+            data[i].CopareTo(data[j])
+            ...
+        }
+
+        Apple[] crate = ...; 
+
+        IEnumerable<Apple> apples = 
+            Sort<Apple>(crate);
+
+    What are generics in C#? ~ The Verification that an unknown type is specific 
+        The compiler will take over and replace generic <T> with whatever is required with object substitution 
+
+        void Sort<T>(<T>[] data)
+            where T : ICompariable<T>
+        {
+            data[i].CompareTo(data[j])
+        }
+
+    Collections are natively generic ~ a List<T> 
+
+        public class List<T>
+        {
+            ... 
+        }
+
+    Which are specificed at the time a concrete element is created; 
+
+        List<string> stringList = new(); 
+        List<int> numberList = new();
+        List<bool> truthyList = new();
+
+
+Understanding the need for a collection; 
+    A collection isnt a request, its a means of fufilling a request! 
+
+    AC: "Given a sequence of objects and an integer number of columns, print the objects out formatted as a grid"
+    
+     
+    
+
