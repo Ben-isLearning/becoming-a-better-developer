@@ -11,7 +11,6 @@ Encapsulating Collections
             >>Collects Data into   List<T>
                 >>Perform multiple Operations to stir up List's content, without destorying previous operations data. 
 
-
 Encapsulating A List ~ The power of linear collections 
 
     The generic GridFormatter accepts an IEnumerable<T>, then saves it internally as an IList<T>
@@ -23,7 +22,6 @@ Encapsulating A List ~ The power of linear collections
 
     The Augmented Constructor Principle 
         Avoid work in a constructor that significantly exceeds the dimenstions of its arguments. 
-
 
 Justifying Decisions 
     Why a List, rather than anything else? 
@@ -59,7 +57,6 @@ Imposing views upon a Collections
         public IEnumerable<string> Format(int width, int gap) => 
             Enumerable.Empty<string>();                                     << Nothing but a specfic view of the list that returns printable rows 
 
-
 Completing the design 
 
     Jesus crist this was an intense module ~ 
@@ -77,7 +74,28 @@ Completing the design
             +Data encapsualation at its finest! 
 
 Inventing Shuffling algorithm 
+    Randomized algorithm ~ To answer "what if" 
+
+    AC: 
+        Given a sequence, reproduce it in shuffled order 
+        -Every permutation is equally probable and dependant
+        -Repeared reading will yield a different order of subjects 
+
+            IEnumerable<Workers> workers; 
+
+            var a = shuffle(workers);
+            var b = shuffle(workers);
+
+    Theory: 
+        Given equally probable, independant permutations, each of the N items has uniform probability distribution of possible patterns. 
+
+    
+    Implementing Fisher-Yates Shuffle:
+        We need to shuffle an input sequence        but, Sequence cannot tell number of elements
+        Can we use a list/array?                    No Efficient item removal 
+        Can we use a dictionary?                    What would be the key? 
 
 Implementing Data Randomization 
 
-Summary 
+    Significantly Easier than before! 
+    
