@@ -1,0 +1,106 @@
+Measuring Performance 
+    Use benchmarkdotnet.org to benchmark
+        >dotnet add package BenchmarkDotNet
+
+    Creating Benchmark - Use seperate class 
+        Isolate critical operation that is causing concern ~ in this case we are worried about the speed of the sorting operation 
+        Create a function with the [Benchmark] attribute 
+        *Tip     Force the use of all variables to prevent the optimizer removing them!
+
+        Make sure that one of the benchmarks are listed as a baseline, something for the others to compare against! 
+
+
+    Benchmarking Output; 
+        Rows are grouped by parameter value
+            Most important columns are Parameter value (2nd), Mean absolute time (3rd), Ratio relative to the baseline (7th)
+            See snip x4  
+
+        **Execution time is dependant on hardware, which is why the baseline approach is used
+            The ratio will remain the same regardless of underlying hardware. 
+
+        The Linq operatior is consistently slower than the list, by a small margin.
+            Our exeperiment has failed, but not for long! 
+
+
+Understanding Optimization via Redesign 
+    Measuring is only the 1st step 
+        Some measuring experiments will point in the direction of Improvement 
+        Even unsuccessfull experiments can help change perspective! 
+
+    Important to think outside the box! 
+
+        Linq Secret ~ OrderBy(x => x.y).First()     Will not order the list, simply return the minimum value. 
+    
+        workers.OrderBy(worker => worker.rate).First()          << Returns the smallest element ~ Without sorting! 
+            Complexity: O(n) time, O(n) space!
+
+        workers.OrderBy(worker => worker.rate).First(worker => worker.Name.Contains("Joe"));    << Returns the smallest element - WITH SORTING! 
+            ~Predicate could be expensive or have side effects! 
+
+    Optimizations could introduce adverse non-functional changes that may have adverse effects on users 
+                  could only apply under certain conditions, 
+                  Must expose implmentations that are best under different conditions! (Documentation)
+                  Must let the caller decide whether to call the alternative implementation 
+                
+
+using Benchmark to Explore Viable redesigns 
+    Build a domain model around collections 
+        A BCL collection is used as a data store 
+
+    Another experiment~ To focus on taking a measurement of loading the first page only. 
+        In addition, benchmarkDotNet creates a sub-directory for the results of the benchmark that can be witnessed in HTML 
+
+        Really interesting! See snip x4 for result! 
+
+    Result: This experiment has shown that PartialSorted() seems to be between 33% and 50% faster than FullySorted()
+        Which shows potential to reduce execution time 
+
+        Remeber that,   SortedList<TKey, TValue> is still a sub-optimal choice
+            -It runs in O(n^2) time, 
+            -Adds uniqueness constraints to Keys
+            -Demonstrates a viable performance upgrade 
+
+            A better collection could run in O(n log n ) time 
+
+    This benchmark has proven that work will pay out! 
+
+
+Picking Low hanging fruit (Quick Wins?)
+
+    Existing code Full flow; 
+        FullySort() 
+            >> list.Sort(Worker.RateComparer);      Which compares PayRate Objects (Implements IComparable<PayRate>) ~ Can be used as a sorting key! 
+                >> CompareTo();                     is taking 2 steps, 1st to normalize durations, 2nd compare money amounts. 
+            
+            Each call to CompareTo() costs us...
+                    2 Double-precision Multiplications 
+                    2 Decimal Precision 
+                    2 Object constructions 
+                    1 Decimal Comparison 
+                    + Many reference types which need to be garbage collected
+            Which is so much!!!
+
+            But sorting is literally everywhere... How to deal with it? 
+                Option 1 Pre-calculating values
+                    >Useful when the caller will be calling these repeatedly  
+
+                    this.HourlyRate = rate.In(TimeSpan.FromHours(1));    
+                    This increases memory usage, but decreases CPU usage.  
+
+                Option 2 Using immutable Structs
+                    >Useful when the datasource is very small 
+                        ensure record is readonly && all instance level fields 
+
+                    public readonly record struct Currency
+                    {    
+                        private readonly string _code = null!;
+                    }
+
+            To show off this, We'll add a 3rd benchmark 
+                Which uses the newly optimized code! 
+
+                See Snip x4 ~ The optimized code is so much better than the unoptimised!
+    
+    Seen success in reducing perfomance penalty without imminent need to devlop a more complex algoritm 
+
+    Benchmarking is a reliable prediction tool!
