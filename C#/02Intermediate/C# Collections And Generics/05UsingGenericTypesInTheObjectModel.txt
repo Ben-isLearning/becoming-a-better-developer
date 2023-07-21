@@ -1,0 +1,148 @@
+Understanding Generic Variance  
+    Generic types are all about substitution; 
+        Leveraging the Object Substitution principle 
+            (that a reference can only receive an object of a subtype of references declared type)
+
+        Ex: 
+            public class Base
+            { 
+                SomeMethod() { ... }    
+            }
+
+            public class Derived : Base 
+            { ... }
+
+            public class MoreDerived : Derived 
+            { ... }
+
+
+            var a = new Base();
+            var b = new Derived();
+            var c = new MoreDerived();
+
+            c.SomeMethod();         << Compiler verifies that the method exists on either the derived type, or somewhere along its inheritance tree 
+
+        
+    What is Generic Variance?
+        A Physics term ~
+            if changes in X axis of the problem, correlate with changes in the Y axis;
+
+            If they change in the same direction, (positive correlation) 
+                then the problem is covariant. 
+
+            If they change in the opposite direction, (negative correlation)
+                the problem is contravariant.
+
+        In programming, 
+            an X axis can show assigned types in a less derived, to more derived ones. 
+            (Generic >> Specific)
+
+                object,     string 
+
+            a Y axis can show generic types in a less derived, to more derived ones. 
+            (Generic >> Specific)
+
+                IEnumerable<object>,    IEnumerable<string>     
+
+
+                Ex 1: 
+                    IEnumerable<string> a = ... 
+
+                    string s = a.GetEnumerator().Current; 
+                    object o = a.GetEnumerator().Current;
+
+                    IEnumerable<object> b = a;  
+
+            Here we see, IEnumerable<T> is covariant, because IEnumerable<string> can easily be substituted with its base, IEnumerable<object>      
+
+
+                Ex 2: 
+                    IComparable<string> a = ... 
+                    a.CompareTo("something"); 
+
+                    IComparable<object> b = a; 
+                    b.CompareTo(new object());
+
+            Here we see, IComparable<T> is contravariant, becuase IComparable<string> cannot be substituted with its base, IComparable<object>  
+
+
+        Variance only applies to interfaces and delegate types
+            Covariance is an attribute of return values 
+            Contravariance is that of input values
+            C# uses in and out keywords respectively to indicate that! 
+
+            IEnumerable<out T>          //Covariant
+
+            IComparable<in T>           //Contravariant
+
+            IList<T>                    //Invariant 
+
+        Realistically Covariance is quite naturally understandable in programming; 
+
+            IList<object> b = new List<string>();       << Doesn't work because <IList<object>> is can't inherit vital pieces that <List<string>> requires. 
+
+            IEnumerable<object> = new List<string>()'   >> Works just fine because  <IEnumerable<object> has inherited everything that <List<string>> needs
+
+
+Demonstrating Variance 
+    In a nutshell, Contravariance should be avoided at all costs.
+
+Designing a Covariant Generic Type 
+    Marker Interface ~ An interface that's concrete impementation does nothing, 
+        only serve syntactical / symantic meaning. 
+
+        interface IOrderedList<T> : IReadOnly<T> {}     
+
+        class Implementer<T> : IOrderedList {}
+
+        class Consumer<T>
+        {
+            public void do(IOrderedList<T> list) ... 
+        }
+
+        Consumer<string> consumer = new();
+
+        consumer.Do(new Implementer<string?());     << Works just fine    the instance is IOrderedList
+
+        consumer.Do(new List<string>());           << Falls down because the instance is IReadOnly
+
+    Could implement empty interfaces for syntactic sugar
+        or Could implement them as a placeholder for future members 
+
+        public interface IOrderedList<out T> : IReadOnlyList<T> //This supports reference and value types - but how?
+        {
+            IOrderedList<T> GetRange(int index, int count);
+        }
+ 
+
+Understanding Complier's view on Generics in .NET 
+    Methods need to know relative positions of fields; 
+        As such the compiler needs to know the size of each field.
+        In non generic classes, its quite straightforward, in generic types, its more complex 
+
+            Class A
+            Type1 field1                <<We know the size we need, lets build it!
+            Type2 field2
+            Type3 field3
+
+            TypeA MethodA
+            TypeB MethodB
+            TypeC MethodC
+
+            Class B<T> 
+            Type1 field1
+            T field2                    <<How big is this going to be...?
+            Type3 field3
+
+            TypeA MethodA
+            TypeB MethodB
+            TypeC MethodC
+
+            Space allocation occurs when the generic type is instantciated;
+                once space is calculated, if another instanciated type needs the same size, it is reused!
+
+                List<T>         <<  Size ?? 
+                List<string>    >>  List<8 bytes>       >> List<string>     >>      List.Length == 100... 100 x 8 bytes. 
+                List<DateTime>  >>  (same)              >> List<DateTime>   >>      (same)   
+
+                List<Int32>     >>  List<4 bytes>       >> List<Int32>      >>      List.Length == 100... 100 x 4 bytes. 
