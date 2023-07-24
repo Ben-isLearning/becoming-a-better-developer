@@ -1,0 +1,133 @@
+Implementing a concrete generic type 
+    Generic types should be impemented with Interface first approach 
+        because;
+            Interface Segregation Principle ~ An interface could only provide a part of the class's API 
+            Polymorphism                    ~ An interface could have many different implementations 
+            Dependancy Injection Priniciple ~ Consumers can depend on either implementation of the interface via DI 
+
+        There may even be different implementations of the OrderedList<T> later. 
+
+    Interface should take a copy of the input data, to avoid manipulating the original data structure. 
+        when constructing true collections, the constructor should sustain the cost of populating data. 
+        (because all collections work this way)
+
+    Implementing GetRange() correctly is quite the task, but to bodge things..
+        
+        public IOrderedList<T> GetRange(int index, int count) => this.Items.GetRange(index, count);         
+            Returns List<T> 
+            Wasteful because this is duplicating all elements in the set range, 
+            & there will be more copying on each call to GetRange()
+
+        public IOrderedList<T> GetRange(int index, int count) => 
+            new FullySortedList<T>(this.Items.GetRange(
+                index.InRange(0, this.Count, nameof(index)), 
+                Math.Min(count, this.Count - index).NonNegative(nameof(count))));
+
+            returns FullySortedList<T> ~ But the current constructor also does sorting and copying... doing this process again is very wasteful. 
+                no waste! 
+                Create an private constructor that creates objects without unneccassary sorting 
+
+
+Demonstrating a concrete generic class 
+
+    It works, but readability is poor. 
+
+
+Applying generic type inference 
+
+    Striving to acheive, avoid specifying type parameters if possible; 
+        We want to use Generic Type inference 
+            But it only applies to methods and delegates.
+            Not to types or constructors. 
+
+    We can move type parameters from types, to parameters! 
+        Add another FullySortedList class into the same .cs
+        Then create a static factory function, to instantiate the generic class above
+            Here the <T> parameter is now defined on a method, which is subject to generic type inference! 
+            Simply call the classes constuctor. 
+
+        public static class FullySortedList
+        {
+            public static FullySortedList<T> Create<T>(
+                IEnumerable<T> sequence, IComparer<T> comparer) => 
+                new FullySortedList<T>(sequence, comparer);
+        }
+    
+        In addition, the static factory function can be used as an extension method, 
+            So that the caller can invoke it as a static function, or to apply it to a method!
+            *Beware class's name doesn't appear inb a call to an extension method, loosing part of the information about what the method does, 
+            as such, they shoul be named in a more descriptive manner 
+
+        public static class FullySortedList
+        {
+            public static FullySortedList<T> ToFullySortedList<T>(
+                this IEnumerable<T> sequence, IComparer<T> comparer) => 
+                new FullySortedList<T>(sequence, comparer);
+        }
+
+    The compiler sees a generic method and tries to match argument types with the type parameter, 
+        since here the compiler knows that rawData is of <T> Worker, 
+        and that rawData.ToFullySortedList<Worker>(Worker.RateComparer), must derive from IEnumerable<Worker>, 
+            the compiler knows that the argument is Worker, or more derived from worker (subclass).  
+            which is the process of Generic Type Inference, which the C# compiler is doing consistently 
+
+        In addition to this, the C# takes all arguments into account, here it sees the (Worker.RateComparer) 
+            which is Contravarianet, in which the param must either be Worker its self, or its supertype (base) 
+
+        There are opposing forces here;
+
+            IEnumerable<Worker> rawData = Workers.GetWorkers(40);
+            IOrderedList<Employee> sorted =
+                rawData.ToFullySortedList(Worker.RateComparer);
+                    ^                        ^
+                here requires                here requires IComparer<Worker>, or its base IComparer<Employee>     
+                IComparer<Worker> 
+                or its subclass
+
+
+            The only class that satisfies both of these requirements is the Worker class alone. 
+                as such, the compiler can infer 100% that the type of this function should be Worker.
+
+
+    And we are left with the visually appealing; 
+        
+        var rawData = Workers.GetWorkers(40);
+
+        var sorted = rawData.ToFullySortedList(Worker.RateComparer);
+
+        sorted.ToGrid(120, 2).WriteLines();
+
+
+        In which we see that code is generic t othe tiniest bit, without using any angle brackets! 
+        The best generic method is the one which requires no type parameters! 
+        
+
+    Another benefit to having extension methods beyond the generic type inference is that they allow for method chaining! 
+        in which the above code becomes; 
+
+        Workers.GetWorkers(40)
+            .ToFullySortedList(Worker.RateComparer)
+            .ToGrid(120, 2)
+            .WriteLines();
+ 
+    This is amazing, because there is no hint of generic, but they are all around! 
+        and there are no sign of collection, but there are two of them hiding behind the curtains! 
+
+    The best collection type is the one you do not depend on!     
+
+
+Using constrained generics 
+    An additional improvement; 
+        If there is nothing specific in a class's public interface, then static factories can return the interface, 
+        rather than the class. 
+            Ex, returning IOrderedList<T>, rather than FullySortedList<T> 
+            Because we can always assign an object to a reference to its parent interface! 
+
+    The last step of generic; 
+        What if we wanted to support consumers that do not have a comparer?
+        Worker already exposes a comparable property, why not let the caller specify that we should sort by that property? 
+
+        
+         
+
+         
