@@ -1,0 +1,153 @@
+Introducing Associative Collections
+    Associative collections have a narrow purpose,
+    There must be a key-to-value mapping (one key to one value)
+
+        Fast at retreiving by the key,  but slow when retreiving by position
+            Directly opposite to lists!
+
+        Cost of search, insert and delete may vary~
+            hash table      has O(1) time
+            balanced tree   has O(long n) time
+
+            (vs a List where appends take O(1), but search and delete takes O(n))
+
+        Associative Collections rely on hash tables and balanced trees
+            HashSet & Dictionary use the hash table
+            SortedDictionary used the balanced tree
+
+        Demos;  Aggregating Money objects by their currency
+            Dictionary, SortedDictionary and even ImmutableSortedDictionary
+
+                Caching equal objects
+            HashSet
+
+        
+Implementing a Dictionary-based Class
+    Could use LINQ ~        .ToDictonary(money => money.Currency)      ~ But It will throw if duplicate Currency appears 
+    Use Standard foreach loop to keep adding money. 
+
+    Don't violate the Invariant! 
+        >A claim that is always true throughout the objects lifetime 
+
+        Ex: Money.IsZero 
+            public bool IsZero => this.CurrencyToBalance.Count == 0;   
+
+            No Money with zero amount will ever be added to the dictionary in question 
+
+            public void Add(Money other)
+                {
+                    if (other.IsZero) return;                   // << Maintains the Invariant
+
+                    this.CurrencyToBalance[other.Currency] =    
+                        this.FindOrZero(other.Currency, other.Precision).AddStrict(other);      
+                }
+
+
+Indexing items by a Sorted Key
+    Changed         private Dictionary<Currency, Money> CurrencyToBalance {get; }
+    To              private SortedDictionary<Currency, Money> CurrencyToBalance { get; }
+
+
+Wrapping a collection within an immutable class
+    To implement immutability ~  
+        Turning     public void Add(Money other) => 
+        into        public MoneyBag Add(Money other) => 
+
+        We'll be putting more stress on the cost of creating a new instance. 
+
+        Ex: inside Money.cs 
+            public Money Multiply(decimal factor) =>        Takes constant time, because the number of fields in the new object is constant. O(1)
+
+        Ex: Inside MoneyBag.cs  ~ is different because its a collection! 
+            public MoneyBag Add(Money other) =>             Requires instansiating and populating a copy of the dictionary, Requires O(log n) to Add. 
+                                                            Copying a SortedDictionary requires O(n log n)
+
+            When the method received a single object, why pay O(n) or O(n log n) to execute?
+            Could be acceptable when populating the whole collection though. 
+            *as per ISO 4217, there are currently 300 currencies* 
+            Could mean that our code could run upto 300 times slower than neccassary. 
+
+            There exists an ImmutableSortedDictionary class. 
+
+        When creating a new ImmutableSortedDictionary, intansiate the ImmutableSortedDictionary with .Empty 
+            this.CurrencyToBalance = ImmutableSortedDictionary<Currency, Money>.Empty;   
+
+        Follow pattern of immutable collections; 
+            make constructor private 
+            give it entire state of new object 
+
+
+Identifying Memory Pressure Problems
+    How to reduce memory footprint of an application byt sharing objects
+    
+    Currently:
+        the Currency struct is wrapping around a string, which makes sure noone uses a string to specify currency 
+
+    Addressing Repeated Currency Objects
+        There is no upper bound for the number of objects ~ Could have millions 
+        But ISO 4217 defines less than 300 currencies worldwide 
+
+        Why don't we share the references to the same strings? ~ that would save on memory! 
+        Currency is immutable, and safe for sharing. 
+
+        *Frequently shared objects are more likely to remain present in the fast CPU cache 
+        ~numerous copies of the same data will cause performance degradation
+
+Improving Sharing of Immutable Objects
+    The Flyweight Design Pattern; 
+        Applies to sharable objects 
+        Applies when a lack of object sharing hurts performance 
+        Serve unique instances from a collection instead of creating it again 
+
+    Example; 
+        string a = new StringBuilder().Append("Some").Append("thing").ToString();       Produces "Something" 
+
+        string b = string.Intern(a); 
+
+        string temp = new StringBuilder().Append("So").Append("me").Append("thing").ToString();
+
+        string c = string.Intern(temp);     //Produces "Something"
+
+        String a, and String temp are two disinct string instances 
+        But after Interning, all three are interned into the same object 
+
+        object.ReferenceEquals(a, b);   true
+        object.ReferenceEquals(b, c);   true
+
+        Drawbacks:
+            Intering is global 
+            Once interned, strings remain the the global string pool ~ occupying memory far longer than needed 
+
+    Benchmark Results:                      
+        1000 items ~        PlainCreate took  46ms          Used 41kb 
+                            CachedCreate took 66ms          Used 42kb 
+
+        1_000_000 items ~   PlainCreate took  103,427ms     Used 39,068  kb
+                            CachedCreate took 83,614ms      Used 39,066 kb 
+
+        The memory column shows memory allocated during the run, not memory remaining after the run. 
+        The table also shows that PlainCreate has many long-living objects, far more than CachedCreate
+
+        Upto around 100,000 items, PlainCreate is superior,     
+        The Larger the collection size, the better CachedCreate becomes faster. 
+
+    Secondary Benchmark Results: 
+
+        1_000_000 items ~  1 pass   ~   PlainUse  took  106ms           
+                                        CachedUse took  83ms          Ratio of 0.78 ~ like 22% faster  
+
+
+        1_000_000 items ~ 10 passes ~   PlainUse  took  124ms           
+                                        CachedUse took  86ms          Ratio of 0.70 ~ like 30% faster  
+
+
+    If using more than 100k items, cache that stuff! 
+
+    Dictionaries ~ O(1) time for Operations 
+    SortedDictionaries ~ O(log n) time for Operations 
+    ImmutableSortedDictionaries ~ Safe for Multithreading! 
+
+    Lack of sharing hurts CPU, and tanks memory! 
+    Use HashSets! 
+
+    
