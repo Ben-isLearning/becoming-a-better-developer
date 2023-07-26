@@ -1,0 +1,40 @@
+Favoring Simple Design over the Complex One
+    Demo 1: Transparent Object Cache
+        Caching soluting 1 ~    HashSet<T>  ~                       Test if duplicate
+                         2 ~    Dictionary<TKey, TValue>    ~       Use constructor args as the key
+
+    Demo 2: Domain-Oriented Class
+                Build on Utility classes
+                    Build on Common Collections
+
+    Another Benchmark Results: 
+
+        1_000     items ~  1 pass   ~   PlainCreate     took  43ms          ~ Still Fastest 
+                                        CachedCreate    took  60ms          
+                                        MemoizedCreate  took  51ms  
+
+        100_000   items ~  1 pass   ~   PlainCreate     took  6565ms          ~ Still Fastest Not by much!  
+                                        CachedCreate    took  8500ms          
+                                        MemoizedCreate  took  6966ms  
+    
+        1_000_000 items ~ 1 pass    ~   PlainCreate     took  105,101ms           
+                                        CachedCreate    took   79,778ms     
+                                        MemoizedCreate  took   64,653ms     ~ 40% Faster!   
+
+
+    Another One:
+        1_000_000 items ~ 1 pass    ~   PlainCreate     took  40 million Bytes ~ 32 million bytes storing repeated strings - so much wasted memory!            
+                                        CachedCreate    took   8 million Bytes
+                                        MemoizedCreate  took   8 million Bytes   
+
+
+Implementing a Transparent Object Cache
+    a Constrained generic class, that uses Read-through caching principe 
+
+Designing Classes Based on Association
+
+Compensating Service Access Time in Chatty Protocols
+
+Designing a General-purpose read-through cache
+
+Improving the performance of a Chatty Service
