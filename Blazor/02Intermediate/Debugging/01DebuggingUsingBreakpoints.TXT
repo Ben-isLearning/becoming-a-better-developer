@@ -1,0 +1,56 @@
+Debugging Using Breakpoints
+
+    Breakpoints are used to pause code execution of a program 
+        Use Cases; 
+
+        Understand Program Flow 
+            Observe a program step by step 
+
+        Inspect variables and program state 
+            Gain insight in unexpected values 
+
+        Identify erros or bugs 
+            Determine where and when things go wrong 
+
+    Setting a simple breakpoint ~ 
+        Just to stop the app while debugging 
+
+        Quite literally, just clicking shoulder to add the red dots.
+        Can also see all breakpoints Debug > Windows > Breakpoints 
+
+        >Interestingly page flow begins in @code{}
+
+    Advanced Breakpoint Techniques ~ 
+        Conditional Breakpoints ~ Only pause execution on a condition 
+            Click Breakpoint > Settings > (check) Conditions >> Set condition 
+            Shows as a Breakpoint with a + inside. 
+
+            *Breakpoints aren't loaded on initial load && Debugging only avaliable inside chrome. 
+
+        Function Breakpoints ~ Pause execution when a certain function is called
+            Find Function > Debug > New Breakpoint > New Function Breakpoint > Insert function name 
+            *Doesn't show in shoulder 
+
+            *Doesnt work on WASM, only Server* 
+
+        Action Breakpoints ~ When a breakpoint is hit, perform an action 
+            Breakpoints > Settings > Actions > Specify action 
+            *Shows as a Diamond
+
+        Only Enable when ~ 
+            Breakpoint > Settings > Check Only enable when... > Select other breakpoint 
+            *Shows as breakboint with anchor*
+
+    Temporary Breakpoints 
+        Only pauses once. 
+        Breakpoints > Settings > Remove Breakpoint once hit 
+
+        *Shows as a Breakpoint with a clock* 
+
+    Exporting and Importing Breakpoints 
+        Allows the sharing of breakpoint placements
+
+        
+
+
+
