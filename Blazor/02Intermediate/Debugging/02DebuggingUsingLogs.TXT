@@ -1,0 +1,86 @@
+Debugging Using Logs 
+    Logs are records of events and data changes 
+
+    Logs use cases 
+        Gain visibility into system operation 
+
+        Problem reproduction and resolution
+
+        tracking Performance metrics
+
+    Logging Levels, Targets and Libraries 
+        
+        Logging levels 
+            define the importance of the message you want to log 
+            +Filtering 
+
+            Typical Levels 
+            1) Debug        ~  Debugging information 
+            2) Info         ~  Provide generic system info how requests and responses 
+            3) Warning      ~  Not errors, but Warning ie, low disk space
+            4) Error        ~  Log issues that prevent correct functioning 
+            5) Critical     ~  Anything that causes the system to shutdown 
+                (Fatal)
+
+        Logging Targets 
+            Where to display/store log messages? 
+
+            File            ~   
+            Console         ~ Output to console/terminal - good for development phase 
+            Database        ~ Stored for analyzing data 
+            Network         ~ Sent over network to logging server (common in distributed systems)
+            External        ~ 3rd party services 
+
+        Logging Libraries 
+            Nlog, Serilog, log4net 
+            (Maybe Tom build ours?)
+
+
+    Logging to a file with Serilog
+        >Install Serilog & Appropriate Sinks & Extensions 
+         
+        Insert Serilog to the DI Container 
+
+        //Configure Serilog
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Information)
+            .Enrich.FromLogContext()
+            .WriteTo.File("Logs/log.txt", rollingInterval: RollingInterval.Day)
+            .CreateLogger();
+
+        //User Serilog 
+        builder.Logging.ClearProviders();
+        builder.Logging.AddSerilog(); 
+
+    Logging to a Database with Serilog 
+        >Install Serilog & Appropriate Sinks & Extensions 
+
+        >Create Database 
+        >Create table 
+        >link to table with serilog 
+
+        string dbConnectionString = "xxx";
+
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Information)
+            .Enrich.FromLogContext()
+            .WriteTo.MSSqlServer(
+            connectionString: dbConnectionString,
+            sinkOptions: new Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions() {TableName = "Logs"})
+            .CreateLogger();
+
+        //User Serilog 
+        builder.Logging.ClearProviders();
+        builder.Logging.AddSerilog(); 
+
+
+    Defining a Logging Pattern; 
+        Build in properties 
+            Exception 
+            Level 
+            Message 
+            NewLine 
+            Properties 
+            
