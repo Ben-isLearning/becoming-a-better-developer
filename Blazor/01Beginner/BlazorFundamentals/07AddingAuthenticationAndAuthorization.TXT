@@ -1,0 +1,131 @@
+Adding Authentication and Authorization 
+
+    Don't DIY - Use a 3rd party. ~ Using Auth0 
+        IdentityServer 
+        Okta
+        Auth0 
+        Azure Active Directory 
+
+        (We'll use Auth0 here)
+        >No risk of incorrectly storing password data on our system.
+    
+        Blazor uses the PKCE flow, (Proof of Key for Code Exchange)
+
+            Blazor App              Auth0 
+            User logs in    >>      User logs in 
+
+                            <<      User is Redirected 
+
+            Auth code Used
+            for ID / Access >>      
+            Token              
+
+                            <<  Access Token / ID returned 
+
+        Setting up Auth0 
+            Create Account 
+                Remember Domain && Client ID 
+                Input Login and Logout redirects 
+
+        Adding Authenitcation Support with Auth0
+            1- Add appsettings.json with Auth0 values 
+            2- Get NuGet package and scripts reference 
+            3- Configure changes (AddOidcAuthentication())
+            4- CascadingAuthenticationState and AuthorizeRouteView within (App.razor)
+            5- Authentication.razor && AuthenticatonStatus.razor 
+
+        Default Behaviours;
+            Redirect to authentication/login 
+                *[Authorize] attribute 
+            Redirect to authentication/login-callback 
+                Authentication response processed automatically 
+
+    Adding Authentication in Practice 
+        01, Create an appsettings.json with Auth0 values 
+            BethanysPieShopHRM.App\appsettings.json
+            
+            "Auth0": {
+              "Authority": "https://dev-s1xdababqyamkah5.us.auth0.com",
+              "ClientID": "C9RFFYvrYiWYofeVDH2ZIsFeI7oT9STR"
+            }
+
+        02, Get Nuget Package for Authentication & Add references 
+            Downloaded & installed .nuget\packages\microsoft.aspnetcore.components.webassembly.authentication\7.0.9\
+
+            BethanysPieShopHRM.App\wwwroot\index.html 
+            <script src="/Microsoft.AspNetCore.Components.WebAssembly.Authentication/AuthenticationService.js"></script>
+
+        03, Configure changes (Add through DI container)
+            BethanysPieShopHRM.App\program.cs 
+
+            using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+            builder.Services.AddOidcAuthentication(options =>
+            {
+                builder.Configuration.Bind("Auth0", options.ProviderOptions);   //Gathered from appsettings.json 
+                options.ProviderOptions.ResponseType = "code";
+            });
+
+        04, Make changes in Application, 
+            Import the new dependancies to _Imports.razor
+                @using Microsoft.AspNetCore.Components.Authorization
+                @using Microsoft.AspNetCore.Authorization
+
+            Within App.razor, Wrap everything in a <CascadingAuthenticationState> component ~ from here everything knows about Authentication Info; 
+                <CascadingAuthenticationState>
+                    <Router AppAssembly="@typeof(App).Assembly" AdditionalAssemblies="@lazyLoadedAssemblies" OnNavigateAsync="@OnNavigateAsync">
+                        //Rest of Application 
+                    </Router>
+                </CascadingAuthenticationState>
+
+            Within App.razor, Wrap specific routes inside <AuthorizeRouteView> components to protect each route 
+                <CascadingAuthenticationState>
+                    <Router AppAssembly="@typeof(App).Assembly" AdditionalAssemblies="@lazyLoadedAssemblies" OnNavigateAsync="@OnNavigateAsync">
+                            <Found Context="routeData">
+                                <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">                                    << Anything in here needs Auth 
+                                    <Authorizing>
+                                        <p>Determining session state, please wait...</p>
+                                    </Authorizing>
+                                    <NotAuthorized>
+                                        <h1>Sorry</h1>
+                                        <p>You're not authorized to reach this page. You need to <a href="/authentication/login">log in.</a></p>
+                                    </NotAuthorized>
+                                </AuthorizeRouteView>
+                                <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+                            </Found>
+                            <NotFound>
+                                <PageTitle>Not found</PageTitle>
+                                <LayoutView Layout="@typeof(MainLayout)">
+                                    <p role="alert">Sorry, there's nothing at this address.</p>
+                                </LayoutView>
+                            </NotFound>
+                        </Router>
+                </CascadingAuthenticationState>
+
+        05, Create Authentication.razor to allow calling to/from Auth0 
+            Create Pages/Authentication.razor 
+                @page "/authentication/{action}"
+                @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+                @using Microsoft.Extensions.Configuration
+
+                @inject NavigationManager Navigation
+                @inject IConfiguration Configuration
+
+                <RemoteAuthenticatorView Action="@Action">
+                    <LogOut>
+                        @{
+                            var authority = (string)Configuration["Auth0:Authority"];
+                            var clientId = (string)Configuration["Auth0:ClientId"];
+
+                            Navigation.NavigateTo($"{authority}/v2/logout?client_id={clientId}");
+                        }
+                    </LogOut>
+                </RemoteAuthenticatorView>
+
+                @code {
+                    [Parameter] public string Action { get; set; }
+                }
+
+        I can't figure out how to make Auth0 and Blazor communicate, keeps telling me that I have the wrong client ID 
+
+        ggwp Auth0, you win. 
