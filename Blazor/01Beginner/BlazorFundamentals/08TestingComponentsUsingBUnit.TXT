@@ -1,0 +1,77 @@
+Unit Testing in Blazor 
+
+    Understanding Unit Tests 
+       Definition 
+           A unit test is an automated piece of code that invokes 
+           a unit of work in the system and then checks a single 
+           assumption about the behaviour of that unit of work. 
+           -Roy Osherove 
+
+        Applications
+            A Block of code 
+            A Method 
+            Isolated & Independent 
+
+        Using Unit Test, Should be;
+            Consistent
+            Automated
+            Fast 
+
+        Helps us 
+            Find Bugs 
+            Make changes without fear of breaking stuff  
+            Improve Code Quality 
+            Documentation of code 
+
+        Parts of a unit test 
+            Arrange 
+            Act 
+            Assert 
+
+    Writing tests with bUnit 
+        Features 
+            Testing using C# or Razor files 
+            Semantic HTML Comparer (Smart enough to understand html)
+            Inteeracting with components and triggering events 
+            Passing params and injecting services is supported 
+
+        bUnit relies on a TestRunner (xUnit) and a Mocking service (Moq)
+
+
+    Writing Tests 
+        in .cs files OR in .razor files 
+            *ctx ~ Context 
+            *cut ~ Component Under Test 
+
+        Ex: 
+            HelloPluralsight.razor 
+                <h1>Hello Pluralsight</h1>
+
+            @code {
+                [Fact]
+                public void HelloPluralsightComponentRendersCorrectly()
+                {
+                    //Arrange 
+                    using var ctx = new TestContext(); 
+
+                    //Act 
+                    var cut = ctx.Render(@<HelloPluralsight />); 
+
+                    //Assert 
+                    cut.MarkupMatches(@<h1>Hello Pluralsight</h1>); 
+                    //Brittle 
+                }
+            }
+
+    Example;
+        [Fact]
+        public void RenderSampleComponentWithValueGreaterThanZero()
+        {
+            //Arrange 
+            using var ctx = new TestContext(); 
+            //Act 
+            var cut = ctx.Render(@<SampleComponent MessageCount="3" />); 
+            //Assert 
+            cut.MarkupMatches(@<h3>Inbox</h3><h4>You currently have 3 questions from employees! </h4>); 
+            //Brittle 
+        }
