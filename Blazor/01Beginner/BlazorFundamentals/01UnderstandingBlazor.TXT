@@ -1,0 +1,61 @@
+Understanding Blazor
+
+    Hello Blazor 
+    Blazor uses C# and HTML 
+
+        Blazor WASM ~   Can run on WebAssembly, (WASM) entirely on the client. 
+        Blazor Server ~ Can also run on the Server too! 
+
+        No Plugins, all based on web standards 
+
+        Blazor intergrates with Js
+
+        Blazor is an ASP.NET Core Framework, Built on; 
+            Kestrel 
+            Model binding
+            Middleware 
+            Razor 
+            Dependancy Injection 
+            Logging 
+
+        Everything is a component :D 
+            Page components, or components 
+            UI & logic can be bundled together
+
+    Understanding Hosting Models 
+    >Same code, different behaviour 
+
+        Blazor WASM 
+            Client-Side, executed in Browser
+            Compiled application is downloaded with .NET runtime 
+            .dll files are deployed as static files 
+
+            Client                      Server 
+                                        (Hosted App + Runtime, compiled into WebAssembly)
+            User Requests               
+                            <   <   <   Everything Downloaded 
+            
+            *Runs as a Progressive Web App (PWA)
+
+        Blazor Server 
+            Server-side, executed in Server 
+            Backed by SignalR connection to update DOM 
+            *For each user running the App, an instance is needed on the server* ~ HELLA SCALING ISSUES 
+            
+            Client                      Server 
+                                        (Hosted App + Runtime, compiled into WebAssembly)
+            User Requests               
+                            <   <   <   Initial HTML 
+                            <       >   SignalR Connection Created
+            Interaction 
+            via SignalR  
+
+            *Supports old browsers that dont support WASM 
+            *No Offline support
+            *Network delay 
+
+        Hybrid 
+            Both run at once... 
+            Can build Native desktip apps & Mobile apps with Maui 
+            *Out of the scope of this course 
+
