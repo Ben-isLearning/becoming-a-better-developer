@@ -1,0 +1,18 @@
+Introduction 
+
+.Net Blazor App Structure 
+
+Intergrating bUnit into the Project 
+    >Its a testing library for Blazor Components 
+        C# or Razor syntax 
+        HTML Comparer 
+        Event Handler 
+        Service Injection 
+        Mock JSRuntime 
+        Mock Auth 
+
+    >Add Project 
+        xUnit Test Project 
+            >Add NuGet Package  
+            bunit 
+
