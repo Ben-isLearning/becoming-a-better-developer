@@ -1,0 +1,112 @@
+Unit Testing 
+
+Verifying Component Markup 
+    Various Approaches
+        Basic verification of raw markup           ~ Compare raw strings     
+        Semantic comparison                        ~ Compare two markup semantically   
+        Inspecting individual nodes in a DOM tree  ~ Examining output at DOM level  
+
+    Test to ensure that everything on our simple webpage loads correctly: 
+        Implement a TestContext() instance that is imported from bUnit, 
+        Mock the rendering of said component
+        Find the markup, much like jQuery
+        Assert against the markup 
+
+            //Arrange
+            using var ctx = new TestContext();
+
+            //Act 
+            var renderedComponent = ctx.RenderComponent<Pages.Index>();
+
+            //Assert
+            var h1Element = renderedComponent.Find("h1");
+            h1Element.MarkupMatches("<h1>Welcome to our school</h1>");
+
+    Test Component Parameter Passing 
+        More complex component receives 2 params from its parent; 
+            [Parameter]
+            public Student SelectedStudent { get; set; }
+            
+            [Parameter]
+            public string Heading { get; set; }
+
+
+        To tests this, we'll render the component under test, in the test function, 
+        Mocking as if we're rendering the component under test, in its parent component. 
+            Implement a TestContext() instance that is imported from bUnit, 
+            Mock all the data that is required by the parameters 
+            Mock the rendering of said component
+            Assert against the values of renderedComponent instance 
+        
+            var expectedHeading = "Student details";
+            var expectedStudent = new Student()
+            {
+                Id = 1,
+                Name = "Ben W",
+                Email = "test@test.com",
+                Phone = "555",
+                Address = "sample",
+            };
+
+            //Act
+            var renderedComponent = ctx.RenderComponent<DetailsStudent>(p => p
+                .Add(n => n.Heading, expectedHeading)
+                .Add(n => n.SelectedStudent, expectedStudent));
+
+            //Assert
+
+            //Checking Markup 
+            Assert.Contains(@"<h4 class=""modal-title"">"+expectedHeading+ "</h4>", renderedComponent.Markup);
+            Assert.Contains(@"<p class=""card-text"">"+expectedStudent.Address +"</p>", renderedComponent.Markup);
+            //Very brittle
+
+
+            //Checking Values 
+            Assert.Equal(expectedHeading, renderedComponent.Instance.Heading);
+            Assert.Equal(expectedStudent, renderedComponent.Instance.SelectedStudent);
+            //Better
+
+    Test Service injection 
+    Mocking as if we're rendering the component under test, in a fully functional system. 
+            Create dummy data, in the same structure as the system requires, for the service to provide (see studentsList)
+            Mock the service 
+            Mock the functionality of the service on setup, Method X, returns data Y 
+            Implement a TestContext() instance that is imported from bUnit, 
+            Add the mocked service to the TestContext() instance 
+            Mock the rendering of said component
+            Assert against the values of renderedComponent instance 
+
+
+            var studentsList = new List<Student>()
+            {
+               new Student()
+               {
+                    Id = 1,
+                    Name = "Ben W",
+                    Email = "test@test.com",
+                    Phone = "555",
+                    Address = "sample",
+               }
+            };
+
+            //Mock the students service ~ 
+            var mockedService = new Mock<IStudentsService>();
+
+            //Mock the functionality, then GetStudentsAsync() is called, it Returns studentsList asyncronously.  
+            mockedService.Setup(s => s.GetStudentsAsync()).ReturnsAsync(studentsList);
+
+            //Create Text context
+            using var ctx = new TestContext();
+
+            //Add a service to our TestContext object. 
+            ctx.Services.AddScoped(provider => mockedService.Object);
+
+
+            ////Act
+            var renderedComponent = ctx.RenderComponent<AllStudents>();
+
+            //Assert
+            Assert.Equal(studentsList.Count, renderedComponent.Instance.students.Count);
+
+
+
