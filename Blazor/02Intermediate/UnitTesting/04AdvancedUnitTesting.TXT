@@ -1,0 +1,93 @@
+Advanced Unit Testing 
+
+    Unit testing Athentication and Authorization
+    Mocking as if we're attempting to log into the component under test, in a fully functional system. 
+        Implement a TestContext() instance that is imported from bUnit, 
+        Add the mocked Authorization provider to the TestContext() instance
+        Set the authorization state of a fake email address  
+        Mock the rendering of said component
+        Assert against the markup of the rendered component  
+
+        //Arrange
+        using var ctx = new TestContext();
+        var authContext = ctx.AddTestAuthorization();
+        authContext.SetAuthorized("hello@world.com", AuthorizationState.Authorized);
+
+        //Act
+        var renderedComponent = ctx.RenderComponent<Pages.Index>();
+
+        //Assert
+        Assert.Contains(@"<h1>Welcome to our school</h1>", renderedComponent.Markup);
+        //Brittle!
+
+    Unit Testing HTTPClient  **Should Return a Task 
+    Mocking as if we're attempting to send & receive a HTTP request, in a fully functional system.
+        Create dummy data, in the same structure as the system requires, for the service to provide (see studentsList)
+        Implement a TestContext() instance that is imported from bUnit, 
+        Add the Mocked the service 
+        Mock the functionality of the service, When HTTP Request X is made, Respond with HTTP Y 
+        Add the Mocked functionality to the TestContext() instance
+        Save the response to assert against later 
+        Double check that the StatusCode is correct before any assertions
+        Derive the serialized json from the response 
+        Deserialize the json into a usable object
+        Assert against the deserialized object.  
+
+            //Arrange
+            var studentsList = new List<Student>()
+            {
+                new Student()
+                {
+                    Id = 1,
+                    Name = "Ervis Trupja",
+                    Email = "ervis@trupja.com",
+                    Phone = "12345678",
+                    Address = "Address sample value"
+                }
+            };
+
+            using var ctx = new TestContext();
+            var httpMock = ctx.Services.AddMockHttpClient(); 
+            httpMock.When("/getAllStudents").RespondJson(studentsList);
+
+            //Act
+            var httpClient = ctx.Services.BuildServiceProvider().GetService<HttpClient>();
+            var httpClientResponse = await httpClient.GetAsync("/getAllStudents"); 
+            
+                //Pseudo assert
+            httpClientResponse.EnsureSuccessStatusCode(); 
+            
+            string HttpClientResponseJsonContent = httpClientResponse.Content.ReadAsStringAsync().Result;
+            List<Student> httpResponseStudents = JsonConvert.DeserializeObject<List<Student>>(HttpClientResponseJsonContent);
+
+            //Assert 
+            Assert.Equal(studentsList.First().Name, httpResponseStudents.First().Name);
+
+    Unit testing NavigationManager 
+    Mocking as if we're attempting to navigate from Page A, to page B, in a fully functional system. 
+        Create dummy data, in the same structure as the system requires, for the service to provide (see expectedNavigateToUrl)
+        Implement a TestContext() instance that is imported from bUnit, 
+        Add the mocked Authorization provider to the TestContext() instance
+        Set the authorization state of a fake email address    
+        Add the Mocked navigation service
+        Mock the rendering of a specific Component (the index page here)
+        Mock the functionality of navigating to the URL provided earlier
+        Assert that the Uri has changed.
+
+            //Arrange
+            string expectedNavigateToUrl = "welcome";
+
+            using var ctx = new TestContext();
+            var authContext = ctx.AddTestAuthorization();
+            authContext.SetAuthorized("ervis@trupja.com", AuthorizationState.Authorized);
+
+            var navigationManager = ctx.Services.GetRequiredService<FakeNavigationManager>();
+
+            var renderedComponent = ctx.RenderComponent<Pages.Index>();
+
+            //Act 
+            //Nagivate from current page, to target page 
+            navigationManager.NavigateTo(expectedNavigateToUrl);
+
+            //Assert 
+            Assert.Equal($"http://localhost/{expectedNavigateToUrl}", navigationManager.Uri);
