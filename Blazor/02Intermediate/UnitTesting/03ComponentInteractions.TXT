@@ -1,0 +1,183 @@
+Component Interactions 
+    Event Handlers & Data validations 
+        Hella event types; 
+            Clipboard, Drag, Focus, Genera, Input, Keyboard, Media, Mouse, Pointer, Progress, Touch.
+
+        Test Events  
+        Mocking as if we're entering data into the component under test, in a fully functional system. 
+            Create dummy data, in the same structure as the system requires, for the service to provide (see studentsList)
+            Mock the service 
+            Mock the functionality of the service on setup, Method X, returns data Y
+            Create expected dummy data, to what we're going to assert against 
+            Implement a TestContext() instance that is imported from bUnit, 
+            Add the mocked service to the TestContext() instance 
+            Find the form elements of the component, change them to specific data. 
+            Find the button on the TestContext() instance 
+            Invoke the click event on the button 
+            Assert against the values of renderedComponent instance 
+            Assert that the success message is shown 
+
+            //Arrange
+            var student = new Student()
+            {
+                Id = 1,
+                Name = "Ervis Trupja",
+                Email = "ervis@trupja.com",
+                Phone = "12345678",
+                Address = "Address sample value"
+            };
+            var mockedService = new Mock<IStudentsService>();
+            mockedService.Setup(s => s.AddStudentAsync(student)).ReturnsAsync(student);
+
+            using var ctx = new TestContext();
+            ctx.Services.AddScoped(provider => mockedService.Object);
+            var renderedComponent = ctx.RenderComponent<NewStudent>();
+
+            string expectedStudentFullName = "Ervis Trupja";
+
+            renderedComponent.Find("#name").Change(expectedStudentFullName);
+            renderedComponent.Find("#email").Change("Ervis@Trupja.com");
+            renderedComponent.Find("#phone").Change("12345678");
+            renderedComponent.Find("#address").Change("Ervis Trupja sample address");
+
+            //Act
+            var submitButton = renderedComponent.Find("button[type=submit]");
+            submitButton.Click();
+
+            //Assert
+            Assert.True(renderedComponent.Instance.isSuccessMessageVisible);
+            Assert.Equal(expectedStudentFullName, renderedComponent.Instance.studentName);
+
+        Test Data Validation ~ Brittle example 
+        Mocking as if we've entered no data into the component under test, in a fully functional system. 
+            Create dummy data, in the same structure as the system requires, for the service to provide (see studentsList)
+            Mock the service 
+            Mock the functionality of the service on setup, Method X, returns data Y
+            Implement a TestContext() instance that is imported from bUnit, 
+            Add the mocked service to the TestContext() instance 
+            Find the button on the TestContext() instance 
+            Invoke the click event on the button 
+            Assert against the markdown of the renderedComponent instance   //Incredibly Brittle  
+            Assert that the success message is not shown 
+
+            //Arrange
+            var student = new Student()
+            {
+                Id = 1,
+                Name = "Ervis Trupja",
+                Email = "ervis@trupja.com",
+                Phone = "12345678",
+                Address = "Address sample value"
+            };
+
+            //Create Service 
+            var mockedService = new Mock<IStudentsService>();
+            //Setup mock Functionality
+            mockedService.Setup(s => s.AddStudentAsync(student)).ReturnsAsync(student);
+
+            //Create Context
+            using var ctx = new TestContext();
+            //Add Mock functionality
+            ctx.Services.AddScoped(provider => mockedService.Object);
+
+            //Create component 
+            var renderedComponent = ctx.RenderComponent<NewStudent>();
+
+            //Act
+            var submitButton = renderedComponent.Find("button[type=submit]");
+            submitButton.Click();
+
+            //Assert
+            Assert.Contains(@"<div class=""validation-message"">The Name field is required.</div>", renderedComponent.Markup);
+            Assert.Contains(@"<div class=""validation-message"">The Email field is required.</div>", renderedComponent.Markup);
+            Assert.Contains(@"<div class=""validation-message"">The Phone field is required.</div>", renderedComponent.Markup);
+            Assert.Contains(@"<div class=""validation-message"">The Address field is required.</div>", renderedComponent.Markup);
+
+            Assert.False(renderedComponent.Instance.isSuccessMessageVisible);
+
+    Component Rendering 
+        Triggering and testing rendering, Can't test OnInitialized / OnInitializedAsync though. 
+        Mocking as if we've entered no data into the component under test, in a fully functional system. 
+            Create dummy data, in the same structure as the system requires, for the service to provide
+            Mock the service 
+            Mock the functionality of the service on setup, Method X, returns data Y
+            Implement a TestContext() instance that is imported from bUnit, 
+            Add the mocked service to the TestContext() instance 
+            Invoke the ctx.RenderComponent() function to mock an initial render
+            Invoke the renderCompnent.Render() to mock an additional render
+            Assert against the renderedComponent.RenderCount attribute to confirm everything performs as expected
+        
+            //Arrange
+            var student = new Student()
+            {
+                Id = 1,
+                Name = "Ervis Trupja",
+                Email = "ervis@trupja.com",
+                Phone = "12345678",
+                Address = "Address sample value"
+            };
+            var mockedService = new Mock<IStudentsService>();
+            mockedService.Setup(s => s.AddStudentAsync(student)).ReturnsAsync(student);
+
+            using var ctx = new TestContext();
+            ctx.Services.AddScoped(provider => mockedService.Object);
+
+            //1st Initial Render
+            var renderedComponent = ctx.RenderComponent<NewStudent>();
+
+            //Act
+            //2nd Render
+            renderedComponent.Render();
+
+            //Assert
+            var expectedRenderCount = 2; 
+            Assert.Equal(expectedRenderCount, renderedComponent.RenderCount);
+        
+    Async&Await 
+        Checks if values have been set correctly (when set asyncronously)
+        Mocking as if we've entered data into the component under test, in a fully functional system. 
+            Create dummy data, in the same structure as the system requires, for the service to provide (see expectedStringValue)
+            Mock the service 
+            Implement a TestContext() instance that is imported from bUnit, 
+            Mock an instance of the Index page, specifically adding the TextSerivce into the instance
+            Invoke the renderCompnent.Render() to mock an additional render
+            Assert against the renderedComponent.RenderCount attribute to confirm everything performs as expected
+
+            //Arrange
+            string expectedStringValue = "Welcome to Blazor Unit Testing";
+            using var ctx = new TestContext();
+            var textService = new TaskCompletionSource<string>();
+            var renderedComponent = ctx.RenderComponent<Pages.Index>(p => p
+                .Add(ts => ts.TextService, textService.Task));
+
+            //Act
+            textService.SetResult("Welcome to Blazor Unit Testing");
+            renderedComponent.WaitForState(() => renderedComponent.Find("h6").TextContent == expectedStringValue);
+
+            //Assert
+            Assert.Contains(@"<h6>" +expectedStringValue+"</h6>", renderedComponent.Markup);
+
+    Exceptions
+        Mocking as if we've entered data into the component incorrectly, in a fully functional system. 
+            Create dummy data, in the same structure as the system requires, for the service to provide (see student)
+            Mock the service 
+            Implement a TestContext() instance that is imported from bUnit, 
+            Mock an instance of the Index page, specifically adding the TextSerivce into the instance
+            within the rendered component, find the "h1" tag, 
+            Assert that attempting to invoke the .Click(); method on this element throws the expected error 
+            
+            //Arrange
+            var student = new Student();
+            var mockedService = new Mock<IStudentsService>();
+            mockedService.Setup(s => s.AddStudentAsync(student)).ReturnsAsync(student);
+
+            using var ctx = new TestContext();
+            ctx.Services.AddScoped(provider => mockedService.Object);
+            var renderedComponent = ctx.RenderComponent<NewStudent>();
+
+            //Act
+            var h1Element = renderedComponent.Find("h1");
+
+            //Assert
+            Assert.Throws<Bunit.MissingEventHandlerException>(() => h1Element.Click());
+        
