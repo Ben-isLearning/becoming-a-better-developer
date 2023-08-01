@@ -1,0 +1,44 @@
+Debugging Blazor WASM Apps 
+    Slightly more difficult to debug 
+    *Everything runs in the browser 
+
+
+InspectURI 
+    Setting inspectUri, links javascript debugging interface with .NET debugging infrastructure 
+
+    inside app > Properties > launchsettings.json 
+
+    Set; 
+      "profiles": {
+        "SweetBites.WebAssemblyApp": {
+          "commandName": "Project",
+          "dotnetRunMessages": true,
+          "launchBrowser": true,
+          "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",   <<<<
+          "applicationUrl": "https://localhost:7161;http://localhost:5073",
+          "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+          }
+        },
+        ...
+      }
+
+
+    Strangely, breakpoints are only hit for me on the 2nd refresh? 
+
+
+Browser Debugging and Error Troubleshooting 
+    When app is running Shift + Alt + D
+        Can run into error ~ See snip 
+
+        This occurs because the app can't get a list of debuggable tabs from the application 
+        Just copy and paste the command given 
+    
+        Reattempt Shift + Alt + D 
+
+        Hey Presto, DevTools 
+
+
+Breaking on OnInitializedAsync
+    Breakpoints on OnItializedAsync may not be hit on first load, Recomendation is to add load at start of method 
+    
