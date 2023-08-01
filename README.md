@@ -37,7 +37,7 @@ Progress Tracker;
 | XUnit                   | 0 / 3    | 0 / 2        | 0 / 2    |        |   13       |
 | ASP.Net Core 6 Web API  | 1 / 2    | 0 / 10       | 0 / 3    | 0 / 1  |   64       |
 | Design Patterns         | 0 / 15   | 0 / 3        | 0 / 6    |        |   15       |
-| ASP.NET Core 6 Blazor   | 1 / 2    | 2 / 4        |          |        |   14       |
+| ASP.NET Core 6 Blazor   |  $\textcolor{green}{\textsf{2 / 2}}$   | 2 / 4        |          |        |   14       |
 | TypeScript              | 0 / 2    | 0 / 8        |          |        |   16       |
 | Jest                    | 0 / 1    |              |          |        |   2        |
 | React 17                | 0 / 3    | 0 / 17       |          |        |   38       |
