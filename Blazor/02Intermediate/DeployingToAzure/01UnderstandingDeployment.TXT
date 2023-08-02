@@ -1,0 +1,15 @@
+Understanding Blazor Application Deployment 
+
+    Blazor Deployment Models 
+
+    Blazor Server Model 
+        Requires Hosting environment 
+        User interacts with UI through JS Events 
+        SignalR connects clients to server
+        
+    Blazor WASM Model 
+        Runs entirely on Client 
+        Client apps utilize full potenttial of client-side resouces 
+        Can run standalone in the web browser 
+        Can run offline 
+

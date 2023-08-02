@@ -1,0 +1,82 @@
+Preparing the Azure Environment 
+
+    Creating Azure Resource Group
+        portal.azure.com 
+            >Search for "Resource Group" 
+            Click Create 
+                Set Subscription 
+                Add Name 
+                Add Reigon 
+                Click Create
+
+    Creating Azure App Service 
+        portal.azure.com 
+            >Inside Resource Group, click "Add" 
+            Search for "Web App" 
+            Click Create 
+                Provide name for web app 
+                Select Publish type 
+                Select Runtime stack 
+                Select reigon 
+
+                Create hosting plan too 
+            
+            Click Create 
+
+        At this point, everything is setup awaiting content. 
+
+        Configuration > General Settings 
+            Shows Websockets & Application Requet Affinity 
+            *Needs to be on for Blazor apps*
+
+    Creating Azure SignalR 
+        portal.azure.com 
+            Blazor requires SignalR? 
+            >Inside Resource Group, click "Add" 
+            Search for "SignalR Service"
+            Click Create 
+                Provide name 
+                Select Reigon 
+                Select pricing tier 
+                Select Unit count 
+                Select Service Mode     *Serverless doesn't work for Blazor*
+                Click Review + create 
+            Click Create (Will deploy (prepare and configure resources)) 
+    
+    Azure AppService Vs Azure SignalR
+        Azure App Service                   Azure SignalR 
+        Useful for Static WebApps           Suited for Real-Time Communication 
+        (That don't require a backend)
+
+        The bare-bones web hosting server   Configured on top of bare-bones 
+
+        Requires configuratiopn for Blazor  Preconfigured for Blazor Server 
+                                            (Doesn't work with Blazor WASM)
+        
+        Less scalable for sticky resons     Globally scalable for users 
+
+        Less expensive for hosting          Expensive in terms of deployment and scaling 
+
+    Static Web Applications
+        Blazor WASM 
+            Serverless 
+            Progressive Web Apps 
+            No Backend required 
+            Uses a file server 
+
+            Azure hosting platforms; 
+                Azure App Service 
+                Azure Storage 
+
+    Creating an Azure Storage
+        portal.azure.com 
+            >Inside Resource Group, click "Add" 
+            Search for "Storage Account"
+            Click Create 
+                Select resouce group
+                Provide name 
+                Select Reigon 
+                Select Redundancy / Performance 
+                Click Review + create 
+            Click Create (Will deploy (prepare and configure resources)) 
+    
