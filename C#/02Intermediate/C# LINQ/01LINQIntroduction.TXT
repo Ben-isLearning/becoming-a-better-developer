@@ -1,0 +1,119 @@
+LINQ Introduction
+
+    What is LINQ? 
+        Language Intergrated Querying 
+
+    What does it Do? 
+        Can Query any collections that implement IEnumerable<T> or IQueryable<T> 
+
+        Arrays
+        Strings
+        List<T> 
+        HashSet<T>
+        Dictionary<TKey, TValue>
+        LinkedList<T>
+    
+    Intergrates to
+        XML                 ~   XML LINQ Translator    
+        Entity Framework    ~   SQL LINQ Translator (Getting Started With Entity Framework 6)
+
+    LINQ to Objects 
+        LINQ and Strings 
+        LINQ and Reflection
+        LINQ and File Directorys
+        LINQ To Entities 
+        LINQ To Dataset 
+
+    Simply using System.linq; 
+
+    SQL Vs Loops Vs LINQ 
+        Conditional Values
+            SQL
+                SELECT * FROM Products 
+                WHERE ListPrice > 1000 
+
+            Loop
+                List<Product> products = GetProducts();
+                List<Product> list = new(); 
+
+                foreach(Product product in products)
+                {
+                    if (product.ListPrice > 1000)
+                    {
+                        list.Add(product); 
+                    }
+                }
+
+            LINQ 
+                List<Product> products = GetProducts(); 
+
+                var list = (from prod in products               <<Query Syntax
+                            where prod.ListPrice > 1000
+                            select prod).ToList(); 
+
+        Distinct Values Only     
+            SQL
+                SELECT DISTINCT Color FROM Products  
+
+            Loop
+                List<Product> products = GetProducts();
+                List<Product> list = new(); 
+
+                foreach(Product product in products)
+                {
+                    if (!list.contains(product.Color))
+                    {
+                        list.Add(product.Color); 
+                    }
+                }
+
+            LINQ 
+                List<Product> products = GetProducts(); 
+
+                var list = (from prod in products                   <<Query Syntax
+                            select prod.Color).Distinct().ToList(); 
+       
+        Smallest Value Of Collection     
+            SQL
+                SELECT MIN(ListPrice) FROM Products  
+    
+            Loop
+                List<Product> products = GetProducts();
+                decimal returnedValue = decimal.MaxValue; 
+    
+                foreach(Product product in products)
+                {
+                    if (product.ListPrice < returnedValue)
+                    {
+                        returnedValue = product.ListPrice;
+                    }
+                }
+        
+            LINQ 
+                List<Product> products = GetProducts(); 
+    
+                decimal returnedValue = (from prod in products                   <<Query Syntax
+                                        select prod.ListPrice).Min(); 
+
+        Can use pretty much any SQL function in LINQ.
+
+    Types of Operations 
+        Select 
+        Projection (change shape)
+        Order 
+        Get a single Element by X 
+        Filter 
+        IIteration
+        Partitioning
+        Quantify 
+        Set Comparison
+        Set Operations (Unions, concat)
+        Joining 
+        Grouping (subqueries)
+        Distinct Sets 
+        Aggregation 
+        
+
+
+
+
