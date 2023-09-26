@@ -1,0 +1,141 @@
+Getting The Most From Your Sprints 
+
+Incremental Vs Iterative Delivery 
+    Incremental 
+        Small increments of a project are delivered piece by piece untill the entire project is complete 
+        -Stakeholders can give feedback on each piece 
+
+    Iterative 
+        Clear feedback is ilicited after each increment and incorporated into the next increment. 
+
+    Incremental + Iterative == Success! 
+
+        Example; Please add ~ 
+            1) Overnight Delivery Option    (Last Prio)
+            2) 2 day delivery option 
+            3) 5 day delivery option        (1st Prio)
+
+            Plan ~ Tackle 3 first, 2 second and 1 last. 
+
+            1st Increment review: 
+                + Good work 
+                - Only added support for 1 partner (we have 3)
+            
+            Re-Plan ~ Incorporate feedback, Add support for other 2 partners, then continue with 2nd item. 
+
+            2nd Increment review: 
+                + Good work 
+                + All 3 partners are supported 
+                - Don't worry about 3rd ask anymore, system so good now, we don't need it! 
+
+    Team were able to break Large project into smaller deliveries  
+        (allowed client to review and feedback along the way)
+    Team and Client were able to reduce overall effort
+    Iterative & Incremental delivery reduced impact of costly mistakes 
+    Incorporates feedback along the way 
+
+
+Timeboxing
+    Fixed period of time provided to acheive a task. 
+
+    Difficult coding problem - 
+        "Okay, 2 hours max to figure this thing out. Whatever soloution I've got after 2 hours, is what i'll use"
+
+    Sprints - 
+        A Sprint is a fixed timebox.
+        Which a Scrum Team attempts to deliver a pre-selected batch of work.
+        Progress is reviewed at the end of the Timebox, makes adjustments for next sprint.
+
+
+    Sprints Vs Features - 
+        Sprints are 2 week timebox increments.  
+        Features are functional increments (it's done when its done).
+
+        Feature Increments 
+            Features aren't sized consistently.     
+            Feedback comes unevenly. 
+            May not receive feedback on all features 
+
+        Sprint Increments 
+            Feedback occurs more regularly on whatever was worked on during the sprint. 
+            Encourages stakeholders to give more frequent feeback 
+            Easier to coordinate 
+
+
+    Shorter Sprints     - "Walking to tree 65 steps away, blind. Open eyes & Check progress every 4 steps." (Longer overall, but safer!)
+        Easier to Plan
+        Requires more planning 
+        better ability to reduce risk 
+
+    Longer Sprints      - "walking to tree 65 steps away, blind. Open eyes & check progress every 16 steps." (More likely to run into wall)
+        More difficult to plan 
+        Incur more risk 
+
+    Risk Vs Overhead 
+        Less risk, higher overhead. 
+        more risk, less overhead. 
+        2 weeks is best of both worlds. 
+
+
+Definition of Done 
+    Key indicator of a good spirint is how many items the team is completing within the sprint. 
+    Transparency dictates that a Definition of Done should be crystal clear. 
+
+    Stakeholder vs Team 
+        What is done? 
+            Stakeholder thinks X is done,   But Team things Y is done.
+                "Done means its live in production and my customers use it" 
+                vs 
+                "Done means I've finished coding it and its ready to be tested" 
+        
+    Create a definition of done 
+        a good shared understanding of done has a few key qualities 
+            -Attainable 
+                Realistically represents the capabilities of the team 
+            -Collaborative
+                Created by both stakeholders and the development team working together 
+            -Flexible 
+                Subject to change as the team finds better ways to work 
+
+    Evolving the Definition of Done 
+        "All completed items have been coded, tested and deployed to test enviornment"
+            -Issue team finds honestly duplicated code 
+
+        Add to Criteria
+        "All completed items must be peer reviewed by another member of the team" 
+
+        Ammend Criteria 
+        "All completed items must be pair programmed" 
+
+
+Potentially Shippable product increment 
+    High performing scrum teams consistently produce a potentially shippable product increment at the end of each sprint.
+    "Potentially shippable product increment" 
+
+    "Product increment" 
+        -Team has produced something of value that that can add value to the product. 
+            Entirely new feature?
+            Enhancement to existing feature? 
+            Simply a performance enhancement? 
+            performance improvement?
+            -Whatever the increment, it should be something that "Provides measurable value"
+
+            Perhaps the team made significant progress in other areas, that haven't resulted in meaningful increments yet 
+            but ideally atleast some of the work completed in the recent sprint resulted in a product increment 
+
+    "Potentially shippable" 
+        -Goal of scrum is for teams to be in a position that they could ship if they wanted to.
+            Not exactly required to 
+           
+           This means that all code added has been tested, and any new features visible in the product are complete. 
+            *Doesn't mean all features must be complete - use FeatueFlags to hide*
+        
+        Always leave the product in a releaseable state at the end of each sprint 
+
+    Advantages of "Potentially Shippable" 
+        Project can start producing revenue asap
+        Stakeholder may change AC after each sprint 
+        Create a project that is ready to ship at any moment 
+        More transparency - convey the teams true status to project stakeholders 
+
+    >Creating effective user stories 

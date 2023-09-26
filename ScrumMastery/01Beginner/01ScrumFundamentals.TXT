@@ -1,0 +1,71 @@
+Scrum Fundamentals 
+
+Agile Beginnings
+    Agile is a philosophy
+    Scrum is a framework for managing software projects in an Agile mindset. 
+    Kanban is also ^ 
+    XP is also ^ 
+
+    The Agile Manifesto 
+        - Individuals and interactions over processes and tools     (Discourage teams from electronic project management tools) 
+        - Working software over comprehensive documentation         (Not to discourage documentation, but to remind teams that documentation is the goal)
+        - Customer collaboration over contract negotiation          ( (customer == stakeholder) Collaborate to deliver the value at time of delivery)
+        - Responding to change over following a plan                (Adapting to reality, changes in requirements, funding, team etc)
+
+        Note - Tenants describe an outcome, not how to acheive said outcome. 
+        Note - "Over", X over Y... X 
+
+
+The Roots of Scrum
+    Scrum came from from Empirical Process Control (or Empiricism)
+        philosophy - Knowledge comes only, or primarlly, from experience
+
+    Empirically Driven Descisions   - Making desicions based only on what has occured 
+    Lagging indicatiors             - use indicators from historical metrics 
+
+    Make desicisons based on what has happened in the past! 
+
+
+The Three Legs of Empiricism
+    Scrum is a framework, not a process. 
+
+    Definition of key tasks & routine, 
+    non-prescriptive 
+    
+    Scrum Framework + Your Environment = Your process 
+    "Your scrum is not my scrum" 
+    Organisation structure, team dynamics, job complexity all adds variables to the scrum. 
+
+    3 Legs of Empiricism 
+        Inspection
+            Constantly inspect both the project and the process every step of the way 
+            Look for variances 
+            strike the right balance 
+        
+        Adaption
+            Reduce what isnt working, increase what is. 
+            Introduce changes at the right time
+            Adapt the process to serve the project  
+            
+        Transparency 
+            Make your pace and progress visual 
+            Encourage openness across team 
+            share clear status across team boundaries 
+            
+    Scrum doesn't solve your problems
+    Scrum enables you to highlight them. 
+
+What About Engineering?
+    Scrum doesn't care about engineering practices.
+    The focus is entirely on project management principles 
+    most "high performing" scrum teams adopt XP along side of Scrum 
+
+Moving On
+    AgileManifesto.Org 
+        4 Tenants 
+        12 Principles 
+
+    ScrumGuides.Org 
+        
+    Extreme Programming
+    

@@ -1,0 +1,27 @@
+Where Scrum Fits
+
+The Five Values of Scrum 
+    Focus 
+        Limit focus to only a few things at a time, increasing focus on each item. 
+        Break a large project over smaller sprints 
+        
+    Courage
+        Result of Scrum's collaborative nature 
+        Cross-functional team works closely together, increasing their overall capability 
+
+    Openness
+        Ties back to Transparency
+        Regular reviews of work, 
+        Regular planning exercises 
+        Transparent Communication 
+        Sharing project plans and metrics with wider organisation 
+
+    Commitment
+        Producing the highest quality work possible 
+        Always being transparent about true status of each item with stakeholders 
+        Commiting to a specific amount of work at beginning of each sprint (could be a forecast, or could be death by overtime)
+
+    Respect 
+        Showing respect to peers in daily interactions 
+        Transparency cannot exist without respect 
+        
