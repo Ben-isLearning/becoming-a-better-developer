@@ -1,0 +1,13 @@
+LINQ to Select data 
+
+    Sample Data; 
+
+        public partial class Product 
+        {
+            public int ProductId 
+            public string Name 
+            public string Color 
+            public decimal StandardCost 
+            public decimal ListPrice 
+            public string Size 
+        }
