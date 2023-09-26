@@ -1,0 +1,32 @@
+Creating a Compelling Product Vision
+
+
+Understanding the Elements of a Product Vision 
+    Eveyone participates in the Product Vision so everyone understands the product's goals 
+
+    Great product visions communicate
+        WHAT the product will do        (And what the problem will be solving) 
+        WHO the product is for          (Clearly understand which user's this is for)
+        WHY the product will do it      (Team understanding of Motivation behind product)
+
+
+Recognising the traits of a great product vision 
+    "How do we know what a great product vision looks like" 
+
+    -Shared 
+        Entire team understands the vision 
+    -Succinct
+        Stated concicely and quickly understood 
+        (If the vision can be communicated within 30s, its probably succinct enough)
+    -Emergent 
+        Grows and evolves as more is learned about the product     
+
+
+Describing your product and its goals 
+    PRODUCT VISIONS SHOULDN'T BE COMMITMENTS 
+    "What capabilities will the product need" 
+    
+    Informative visualisations 
+    Automated financial importing 
+    automatic expense categoriazation 
+    

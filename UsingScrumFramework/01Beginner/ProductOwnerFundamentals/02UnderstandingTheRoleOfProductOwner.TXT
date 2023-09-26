@@ -1,0 +1,95 @@
+Understanding the Role of the Product Owner 
+
+The Three Facets of Product Ownership 
+    Product Owners primary responsibility is to maximize the value of the product 
+    (Accountable for ROI of scrum team)
+
+        Product Backlog 
+            A list of all necessary for the successful delivery of the product 
+            Product Owner is accountable for the cration of this list 
+            Anyone can add to the Product Backlog 
+            Product Owner is responsible for ordering of the list. 
+            **Product owners should be solely responsible for the product backlog to produce a consistent product 
+
+    3 Facets of Product Ownership 
+        Product Management 
+            Defining overall vision for the product 
+            & Communication of vision 
+            Refining the release strategy 
+
+        Buisness Analysis 
+            Identifying requirements for a successful product 
+            updating the product backlog to reflect those requirements 
+
+        Project Management 
+            Managing the project budget 
+            Ensuring project timetable is on track 
+            -Authority to choose and direct teams work (Not how) 
+                
+        Leadership           
+            Inside the team 
+                Guiding the team in the creation and reaching objectives 
+            Outside the team   
+                Acting as champion for the product and team to the organisation 
+
+
+The capacity of a Product Owner 
+    1 PO to 1 Scrum Team.  Full Time.    
+
+    Product Owners may deletgate some of their responsibilities 
+    But accountability that all of the responsabilities are met rest with the Product Owner 
+    The Product Vision must be owned by a single Produce Owner 
+
+
+Exploring the dynamics between the Scrum Master and Product Owner 
+    Scrum Master        - Helps team adhere to the rules of Scrum Framework
+        Ensures that the Scrum Team operates as efficiently as possiblle
+        Facilities the ceremonies 
+        Protects the tream from outside disruptions 
+        Removes any impediments that arise form the teams path (small blockers - licences, accesses)
+            *one of the most valuable assets of a Scrum Master is their sphere of influence within their organisation* 
+        "Responsible for mentoring each member of the Scrum Team" - The Entire Team!  
+
+    Product Owner       - Defines and shares the overall vision for the product
+        Single source of knowledge for the product 
+        defines and communcates the produce vision wit the rest of the scrum team 
+        Ensures that the product backlog accurately represents the product vision  
+
+    Development Team    - Does the work to create and deliver the product 
+
+
+Understanding the role of The Development Team 
+    Everyone who contributes to the developmenmt of the product is a Developer 
+        (Dev, Tester, Designer)
+
+    Cross-functional Development teams 
+        Operates more independantly in the organisation 
+        reduces hand-offs between isolated teams 
+        Contains the mix of skills necessary to deliver the product 
+            (Engineer may need to help test)
+
+    Size Matters 
+        Reccomended size is 3-9 members. 
+        Large enough to be self-sufficient 
+        But not too large to coordinate 
+        Common size is 5-7.
+        Ideal size is 4-5.
+        (1 PO, 1 Scrum Master, 3 Developers)
+
+    Scrum Teams are self-organising 
+        Those doing the work know how to best approach the work. 
+
+
+First among equals 
+    Noone is the leader - The Team leads themselves. 
+    PO is considered a First Among Equals. 
+    PO has the final say.
+
+    THE PO WILL DRIVE THE SETTING OF CLEAR GOALS FOR THE TEAM, 
+    THE SCRUM MASTER AND THE DEV TEAM WILL DECIDE HOW MOST EFFECTIVELY REACH THOSE GOALS    
+
+    POs should act as enablers for their team to build strong relationships. 
+
+    
+
+

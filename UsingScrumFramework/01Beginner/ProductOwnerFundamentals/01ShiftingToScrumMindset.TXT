@@ -1,0 +1,37 @@
+Shifting To a Scrum Mindset
+ 
+The Agile Landscape 
+    58% of Agile teams use Scrum 
+    10% of agile teams use Scrum/XP 
+    7%  of agile teams use ScrumBan 
+
+    75% of Agile teams use Scrum / Scrum-hybrid approach 
+
+
+Agile Mythbusting
+    Agile helps teams deliver sooner 
+        Agile encourages teams to work in smaller increments 
+        Teams may learn that not all features planned are actually required 
+        Teams new to agile may see an initial drop in their speed (Temporary)
+
+    Agile and Scrum are not the same thing 
+        Scrum is an approach to Agile 
+        Scrum implements the ideas in the Agiule manifesto
+        
+    Agile processes are lightweight 
+        Each agile approach is only lightweight in certain facets of its implementation 
+        Scrum produces lightweight documentation and artifacts 
+        Scrum is comparitively high ceremony 
+
+
+Scrum is a Framework 
+    Framework sefines boundaries in which a team may function 
+    Establishes a steady cadency for delivery 
+    More adapatable to volatile environments 
+    (How is up to the team)
+
+
+Understanding the underlying value 
+    Theories and values that underly Scrum 
+    SCRUM PLANS ARE BASED ON WHAT HAS OCCURED NOT WHAT SHOULD OCCUR 
+
