@@ -44,5 +44,5 @@ Progress Tracker;
 | Testing React           | 0 / 1    |              |          |        |   2        |
 | Redux & Flux            | 0 / 1    |              |          |        |   3        |
 | NoSQL                   | 0 / 2    |              |          |        |   3        |
-| Scrum Mastery           | 0 / ?    |              |          |        |   3        |
+| Scrum Mastery           |  $\textcolor{green}{\textsf{2 / 2}}$    |  0 / 1         |  0 / 2    |        |   3        |
 
