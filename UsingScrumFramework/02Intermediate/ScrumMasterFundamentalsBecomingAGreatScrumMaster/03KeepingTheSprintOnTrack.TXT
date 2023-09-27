@@ -1,0 +1,100 @@
+Keeping the Sprint on Track 
+
+The Daily Scrum is a planning meeting, not a status meeting. 
+    "The daily scrum is our chance to plan how we'll move ourselves closer to the Sprint Goal today" 
+
+    Timeboxed to 15 Mins. 
+    Not a status Meeting, This is a planning session for the day. 
+    -The aim of the daily scrum is for the team to understand;
+        where they are after the previous day's efforts
+        where they want to be at the end of todays efforts 
+        & what needs to happen to help them get there. 
+    
+    "What do you plan to do today, to move closer to the sprint goal?" 
+    Held in the morning 
+
+    Principle of Recency 
+        Things that are most recently learned are best remembered. 
+
+    "Take a moment on the way to the Daily Scrum, to consider what your plan for the day is"
+
+    It's not meant to be as fast as possible. 
+        Its meant to gain the most value from that timebox
+        The timebox is a lever, not a hammer.  
+        -If the value that the conversation is creating outweighs the value of adhering to the timebox, we value the conversation
+
+    Efficiency =/= Effectiveness 
+        5 minute daily scrum is Efficient, sure. 
+        But if the team leaves the meeting without a clear picture of how they need to work together
+        to move forward for the day, it was a waste of time  
+
+        Whereas a 20 minute daily scrum is that leaves a team with a clear picture for the day is effective, 
+        because it produced meaningful value within the team. 
+
+        Take effectiveness over Efficiency, but don't lose sight of either. 
+
+
+The Team's First Daily Scrum 
+    To Do >> In Progress >> Testing >> Done 
+
+    1 Item at a time 
+     
+    Cross-Functional Team 
+        -Everyone works towards the sprint goal 
+        whether its Deving or Testing, actively remove bottlenecks "Look Right" 
+
+
+    Format of the Daily Scrum 
+        Answer 3 Questions; 
+        "What did I do yesterday that helped the Developmenmt Team meet the Sprint goal?"
+        "What will i do today to help the Development Team meet the sprint goal?"
+        "Do I see any impediment that prevents me or the Dev team from meeting the sprint goal?"
+            -Most Important
+            -Seeks to Identify any struggles / difficulties keeping the individual from performing fully 
+            -Anything slowing you down, you should be completely comfortable bringing it up here
+            so that we can work through it as a team to fix it! 
+
+            Commitment to another project? 
+            Missing access to environment? 
+            Stuck on issues? 
+                new Framework or technology? 
+                new area of codebase?
+                particularly tough problem? 
+                    -Someone may know how to fix X  
+
+            Breakouts for assistance etc should happen after the daily scrum
+
+        Each member should be able to answer these questions in 2 minutes 
+
+    Remember that the Daily Scrum is a planning meeting for the Development Team, not a status meeting for the Scrum Master. 
+        -Focus on the scrum board while talking 
+
+    Daily scrum is only intended for the Development Team
+        -Doesn't really include ScrumMaster or PO
+
+
+Possible Ways to Modify the Daily Scrum 
+
+    Burn Down Chart
+        Tracks Progress throughout the sprint 
+        Y) Starts High, Ends Low. 
+        X) From Start of Sprint, to End of Sprint. 
+        Ideal burn rate line 
+        -Provides insight into current progress of the sprint 
+
+    Teams who manually update their burn down chart show more awareness of how they are pacing toward their goal. 
+
+
+Getting the most from your Daily Scrum 
+    Encourage people look at the sprint board 
+
+    Be present at the standups 
+
+    Removing impediements effectively 
+        -Listen for issues that are plaguing the team that aren't being brought up 
+        -Listen to what is not being said 
+        -Don't overpromise what you can remove 
+        -Learn to navigate the politics of your organisation  (Who can help with X?)
+        -Don't burn bridges you may need later 
+
+    A Dead scrummaster is a useless scrummaster

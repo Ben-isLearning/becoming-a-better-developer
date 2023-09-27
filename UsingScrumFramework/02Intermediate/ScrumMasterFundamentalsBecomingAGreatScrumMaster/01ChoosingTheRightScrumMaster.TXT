@@ -1,0 +1,91 @@
+Choosing the Right Scrum Master 
+
+Finding The Right People 
+    Scrum Masters facilitate 
+        -Team must internalize the Scrum principles for themselves 
+    Scrum encourages self-organisation 
+        -Identify, Discuss, Solve
+    Scrum teams continually improve 
+        -Authority Figures may impeed this
+
+
+Servant Leadership 
+    Concept that the team exists to serve the leader, 
+        The leader exists to serve the team. 
+        -Leader should be a supportive force that enables the team. 
+    
+    Those who do the work are best suited to determine how to do the work 
+
+    Teams are oftem the most effective when they self-organise 
+
+    Successful scrum masters facilitate the framework 
+        rather than manage it. 
+    Player coaches for their teams 
+        the best coaching is done from within the team. 
+
+
+Traits of Successful Scrum Masters 
+    Sustainable Pace 
+       - A pace capable of being maintained for months by the team 
+       (40/HR weeks, not 60 hr weeks!)   
+        
+    Aptitude + Attitude  (Attitude beats Aptitude)
+
+    Aptitude 
+        -Well organized 
+        -Respected by the team 
+        -Respected by the organisation 
+        -Respected by the Product Owner 
+        -Understands the Developmental Process
+
+    Attitude 
+        -Want to do the role 
+        -Sincerely desires to help their team improve 
+            Regonize potential for positive change in team mates 
+        -Frustrated when the team isn't effective 
+            Willing to try to improve the teams process for the better 
+            Shows awareness for areas for improvement, & takes initiative to make improvements 
+            Resilience to bring positive change despite setbacks 
+        -Willing to do the work necessary 
+            Aware time will be consumed by ceremonies, coaching, removing impediments 
+            building relationships with wider buisness
+            Acknowledge that Role A & Scrum Master will effect eachother 
+            (Cant give more than 100%)
+
+
+The Best Backgrounds for Scrum Master
+    Software Engineers 
+        -Respected
+        -Know Dev process 
+        -Understand impediments of team 
+
+    Testers 
+        -Holistic view of Project 
+        -Good relationship within team 
+        -Can see stuff Software Engineers dont 
+
+    Project Managers 
+        -Well organised 
+        -Understand Delivery process 
+        -Good relationships 
+    (POs used to lead by authority)
+
+
+Scrum Master Capacity
+    Full-time Dedicated Scrum Master 
+        Committed to 1 Team
+        Allows the complete focus on enabling the team 
+        Enable deeper coaching of the team 
+        *Highest cost option 
+
+    Full-time shared scrum master 
+        Shared across teams 
+        Can serve between 2 to 3 teams 
+        Experience dependant 
+
+    Part-time Scrum master 
+        Serving the role for their team 
+        Must consider the impact of individual's current role 
+        Better focus on a single team 
+        Deeper insight into that team's context 
+        

@@ -1,0 +1,202 @@
+Kicking Off The Sprint 
+
+Sprint ~    "A timeboxed unit of work which the team works together to deliver 
+            a potentially releasable product increment." 
+
+Getting to Know the Team
+    
+    Starting Sprint on a Wednesday? 
+        Avoids most holidays 
+        Avoids single vacation days  
+        Wednesdays are least popular day for holidays
+
+    Key People in Scrum Teams 
+        Scrum Master 
+        Product Owner 
+            -Accountable for ensuring that work is doing is always the absolute highest value they can be doing"     
+        Development Team 
+            -Responsible for delivering the product increment 
+
+    Goals of the Sprint Planning Ceremony
+        **Sprint Planning for a 1 month sprint is 8 hours 
+        **Sprint Planning for a 2 Week sprint is Timeboxed at 4 hours
+            -If we're not done by the 4th hour, then move forward with current work. Look for ways to improve efficiency next time.  
+
+        Answer these questions; 
+
+        What will we deliver? 
+            -Determine what would be the most valuable outcome of this sprint 
+
+        How will we deliver it?
+            -Create a plan to deliver it within the confines of this sprint 
+
+
+What Will you Deliver? 
+    1st Question "What can we deliver as a product increment as a result of this sprint" 
+        Buisness Objective of the sprint is X 
+
+    The Product Backlog 
+        An artifact of the Scrum Framework
+            -a living document that represents the current product vision  
+        A plan to realise the product vision
+            -contains all items known to be necessary to meet that vision 
+        The definition of all neccassary items 
+            -each item contains all information necessary to understand its intent 
+
+        Each item added to the sprint backlog has a short description, and a rough estimate. 
+
+    A Product Backlog Item (PBI)
+        A simple descrition about the intent of the item 
+        Each item isn't a complete requirements document, but a placeholder for a conversation. 
+            "The details of each item should remain malleable depending on any number of factors"
+            "Agile approaches encourage the product owner and the Dev team to collaborate to meet the goal specified on each card"
+
+        A rough estimate of the item's complexity
+        Used for rough planning purposes, and in no way construed as a commitment from the Dev team
+            "Those who will actually doing the work, are those who estimate the work" 
+            -Drop previous Estimate of PBI 
+            -Add new Exstimate of PBI after conversation 
+            Top Left = a value of proirity
+                A - Critial To products success  
+                B - Not quite Critical, but more than a footnote.
+                C - Add Value, increase usability or request from customer 
+                    "Its unlikely they would warrent more than a footnote in the release notes"  
+
+                X - If a product doesn't add any value, its not even added to the product backlog, because there's no value in it. 
+          
+        Its not 'how value is measured', but critical that value is measured.  
+            aids to facilitate a discussion whether the team is working on the highest value work available  
+
+    Ordering the Product Backlog is Ordered by design.
+        Product Backlogs are ordered by highest proirity first;
+            Business Value 
+                -What value will the item provide to the organization? 
+            Risk 
+                -What risk can be addressed sooner rather than later? 
+            Technical neccessity 
+                -Is this item necessary to deliver a higer value item? 
+
+    Product Backlog items with higher priority should be more refined than those with lower priority. 
+        
+
+How Long will it take you? 
+    2nd Question: 
+
+    Estimating in Complexity 
+        Estimating in time is poorly suited to software development 
+        Humans are more adept at estimating in relative quantities than exact quantities 
+
+    Velocity 
+        The total amount of work that a team can successfully complete within a single sprint. 
+        -Based on empirical data 
+        -Provides baseline from which to forecase 
+        -Can be easily adjusted for expected variances 
+
+        Next sprint we'll compare Starting vs Ending velocity, then reposition accordingly. 
+
+    1st PBI "Export the Profit and Loss Report as CSV" 
+        Planning Poker allows the team to arrive collaboratively at an estimate for each item 
+        *Scrum doesn't dictate how they are estimated. Only that they are.*
+    
+        Dev Team vote from a complexity of;     1, 2, 3, 5, 8, 13, 21, ? (WTF is this, needs breaking down)
+
+        2  - Straightforward Problem 
+        8  - Complex Interesting Challenge, Familliar with concept & Data structure, but required Learning a new Library 
+        21 - Toughest Feature we've tackled in some time, Didn't have data in a format we needed, Didn't understand buisness rules behind. Took Weeks!  
+
+    Effort is intentionally vague & means different things to different teams. 
+        5 People may complete 25 points in a 2 week sprint.
+        5 people may only complete 13 points in the same sprint. 
+
+        Maybe each team has a different understanding of what the size of a complexity point is.
+            Each team must be able to select reference items 
+    
+    Its not how many complexity points are assigned to each item. Its simply to create them in the first place.
+        Create reference points, empirical data!!!!
+
+
+Playing a round of Planning Poker 
+    How do you feel about the complexity of X? 
+        compare the complexity against the agreed-upon baseline
+        -If its as complex than one of the reference points, place it there, little higher, little lower no worries 
+        -If its more complex than the 21 reference point, Throw that "?"!! 
+            - Primarly to prompt further discussion within the development team or to break the PBI into several smaller items 
+
+    We'll only add items to the sprint we're confident we can deliver in a 2 week period. 
+        that 21 pointer took 6 weeks. Not coming into sprint. Requires further breakdown.
+
+    Complextiy should take into account the entire effort to deliver an item 
+        Encompassing; Building, Peer Reviewing, Dev Testing, QA Testing  
+
+    A Round of Planning Poker 
+        A Tosses 8 
+        B Tosses 2 
+        C Tosses 5 
+
+        "B - Why do you feel that items is a 2?" 
+            Data and buisness rules are defined 
+            Existing option for export is available 
+            "Seems straightforward" 
+
+        "A - Why do you feel that item is an 8?" 
+            Acknowledges Previous success - Noted from B 
+            More complex because reports are incredibly detailed
+            Testing will be a pain 
+
+    Reconsidering new information, Lets do another round. 
+        A Tosses 5 
+        B Tosses 5
+        C Tosses 5 
+    
+        Team Agrees on Complexity, PO Updates PBI Item. 
+
+    This is a forecast of work we think we can complete in this sprint, not a commitment. 
+        Team should work at a sustainable pace! 
+
+    Predictability is the goal, not Velocity.
+        I Predict that team X will complete 15 points of work each sprint   -   GOOD 
+        team X achieved 10 points, 20 points then 12 points.                -   BAD 
+
+    Crafting the Sprint Goal 
+        Scrum team comes together to create a sprint goal. 
+            Focus on the What, not the How. 
+            
+            Bottom up Sprint Goal 
+                Crafted from as cohesive description of all items selected for the Sprint 
+                
+            Top Down Sprint Goal 
+                Crafted from the vision of the product and the Sprint objective 
+
+        "Provide various options for customers to expert their data from the Profit and Loss Report" 
+            -Keeps teams focused on goal
+
+
+How Will you Deliver it? 
+    We've Agreed upon items, And created a sprint goal .
+    
+    Answer the question; 
+        "How will we work together to deliver the product increment?" 
+
+    Develop a plan for delivery
+        Breakdown Product Backlog Items 
+            Identify the tasks necessary to finish each item
+            (No estimates of tasks)
+        Size the tasks appropriately 
+            Limit each task to no more than 1 day in duration 
+            (Gives better understanding of how we are pacing towards the overall goal each day)
+            If one task tseems like it will take more than one day to complete, simply break it down further into smaller tasks. 
+        Build the Sprint Backlog 
+            Contains all items selected for the sprint 
+
+    Responsibilities During Task Breakdown 
+        -Scrum Master & Dev team formulate plans to tackle items 
+        -May realise that original estimate was incorrect & needing to be revisited 
+            Scrum Master facilitates the breakdown of PBIs 
+            PO Clarifies on PBIs as neccassary 
+
+        PBIs down into tasks, and sub-tasks. 
+        
+    Noone is allowed to redirect the team's efforts, Except for the Product Owner. 
+        Anyone else approaches us to ask us to change priorites, send them to PO. 
+        Some "High Priority" request won't be able to wait until next sprint, 
+        But PO Needs to be aware of impact of requests towards sprint goal.  
